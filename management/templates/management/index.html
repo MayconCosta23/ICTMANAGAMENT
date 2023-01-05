@@ -1,0 +1,724 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+  <head></head>
+    <title>ICT Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href= {% static "vendors/simple-line-icons/css/simple-line-icons.css" %}>
+    <link rel="stylesheet" href= {% static "vendors/flag-icon-css/css/flag-icon.min.css" %}>
+    <link rel="stylesheet" href= {% static "vendors/css/vendor.bundle.base.css" %}>
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href= {% static "vendors/daterangepicker/daterangepicker.css" %}>
+    <link rel="stylesheet" href= {% static "vendors/chartist/chartist.min.css" %}>
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href= {% static "css/add.css" %}>
+    <link rel="stylesheet" href= {% static "css/styles.css" %}>
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href={% static "images/favicon.png" %} />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <!-- <div class="navbar-brand-wrapper d-flex align-items-center">
+          <a class="navbar-brand brand-logo" href="..">
+            <img src={% static "images/favicon.png" %} alt="logo" class="logo-dark" />
+          </a>
+          <a class="navbar-brand brand-logo-mini" href=".."><img src="images/favicon.png" alt="logo" /></a>
+        </div> -->
+        <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
+          <!-- <img src={% static "images/favicon.png" %}  id=imghome alt="logo" class="logo-dark" /> -->
+          <h5 class="mb-0 font-weight-medium d-none d-lg-flex">Welcome {{ request.user }},  {% now "SHORT_DATETIME_FORMAT" %}</h5>
+          <ul class="navbar-nav navbar-nav-right ml-auto">
+
+            <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
+              <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <img class="img-xs rounded-circle ml-2" src= {% static "images/faces/face.jpg" %} alt="Profile image"> <span class="font-weight-normal"> {{ request.user }} </span></a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                <div class="dropdown-header text-center">
+                  <img class="img-md rounded-circle" src={% static "images/faces/face.jpg" %} alt="Profile image">
+                  <p class="mb-1 mt-3">{{ request.user }}</p>
+                  <p class="mb-1 mt-3">{{request.user.email}}</p>
+                </div>
+                <a class="dropdown-item" href="usuarioedit" ><i class="dropdown-item-icon icon-user text-primary"> </i>Alterar Senha</a>
+                <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+
+<!--                    
+                <form id="logout-form" method="post" action="/admin/logout/">
+                  {% csrf_token %}
+                      <input type="hidden" value="logout">
+                      <button type="submit">Encerrar sessão</button>
+                </form> -->
+
+ 
+
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="icon-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="profile-image">
+                  <img class="img-xs rounded-circle" src= {% static "images/faces/face.jpg" %} alt="profile image">
+                  <div class="dot-indicator bg-success" style="margin: 15px 6px 0 0;"></div>
+                </div>
+                <div class="text-wrapper">
+                  <p class="profile-name">{{ request.user }}</p>
+                </div>
+                <div class="icon-container">
+                </div>
+              </a>
+            </li>
+            <li class="nav-item nav-category">
+              <span class="nav-link" style="color: seagreen;">Dashboard</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="..">
+                <span class="menu-title">Dashboard</span>
+                <i class="icon-screen-desktop menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item nav-category" ><span class="nav-link"  style="color: seagreen;">Gerenciamento De Testes</span></li>
+            <li class="nav-item">
+              
+                <a class="btn btn-secondary" id="menu1"data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">ICT 01</a>
+                <button class="btn btn-secondary" id="menu2" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">ICT 02</button>
+                <button class="btn btn-secondary" id="menu3" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">ICT 03</button>
+            <!-- ICT01 -->
+              <div class="row" id="optionsbar">
+                <div class="col">
+                  <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <a class="nav-link" id="options" href="ict1statusneo">
+                      <span class="title">Neo50sﾠﾠﾠﾠ</span>
+                      <i class="icon-screen-desktop menu-icon"></i>
+                    </a> 
+                  </div>
+                
+                  <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <a class="nav-link" id="options" href="ict1statusm75">
+                      <span class="title">M75ﾠﾠﾠﾠﾠﾠﾠ </span>
+                      <i class="icon-screen-desktop menu-icon"></i>
+                    </a> 
+                  </div>
+                
+                  <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <a class="nav-link" id="options" href="ict1statusideapad3i">
+                      <span class="title">Ideapad3iﾠﾠ  </span>
+                      <i class="icon-screen-desktop menu-icon"></i>
+                    </a> 
+                  </div>
+                  <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <a class="nav-link" id= "options" href="ict1statusideapad3a">
+                      <span class="title">Ideapad3aﾠ  </span>
+                      <i class="icon-screen-desktop menu-icon"></i>
+                    </a> 
+                  </div>
+                  <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <a class="nav-link" id= "options" href="ict1statusideapad1">
+                      <span class="title">Sagittaﾠﾠﾠﾠ</span>
+                      <i class="icon-screen-desktop menu-icon"></i>
+                    </a> 
+                  </div>
+                  
+                </div>
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                  <a class="nav-link" id= "options" href="ict1statuse14">
+                    <span class="title">E14ﾠﾠﾠﾠﾠﾠﾠ</span>
+                    <i class="icon-screen-desktop menu-icon"></i>
+                  </a> 
+                </div>
+<!-- ICT02 -->
+                <div class="col">
+                  <div class="collapse multi-collapse" id="multiCollapseExample2">
+                    <a class="nav-link" id= "options" href="ict2statusneo">
+                      <span class="title">Neo50sﾠﾠﾠﾠ</span>
+                      <i class="icon-screen-desktop menu-icon"></i>
+                    </a> 
+                  </div>
+
+                  <div class="col">
+                    <div class="collapse multi-collapse" id="multiCollapseExample2">
+                      <a class="nav-link" id= "options" href="ict2statusm75">
+                        <span class="title">M75ﾠﾠﾠﾠﾠﾠﾠ</span>
+                        <i class="icon-screen-desktop menu-icon"></i>
+                      </a> 
+                    </div>
+
+
+                      <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample2">
+                          <a class="nav-link" id= "options" href="ict2statusideapad3i">
+                            <span class="title">Ideapad3iﾠﾠ</span>
+                            <i class="icon-screen-desktop menu-icon"></i>
+                          </a> 
+                        </div>
+        
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample2">
+                            <a class="nav-link" id= "options" href="ict2statusideapad3a">
+                              <span class="title">Ideapad3aﾠ</span>
+                              <i class="icon-screen-desktop menu-icon"></i>
+                            </a> 
+                          </div>
+          
+                          <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                              <a class="nav-link" id= "options" href="ict2statusideapad1">
+                                <span class="title">Sagittaﾠﾠﾠﾠ</span>
+                                <i class="icon-screen-desktop menu-icon"></i>
+                              </a> 
+                            </div>
+            
+                            <div class="col">
+                              <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                <a class="nav-link" id= "options" href="ict2statuse14">
+                                  <span class="title">E14ﾠﾠﾠﾠﾠﾠﾠ</span>
+                                  <i class="icon-screen-desktop menu-icon"></i>
+                                </a> 
+                              </div>
+              <!--  ICT03-->
+                  <div class="col">
+                    <div class="collapse multi-collapse" id="multiCollapseExample3">
+                      <a class="nav-link" id= "options" href="ict3statusneo">
+                        <span class="title">Neo50sﾠﾠﾠﾠ</span>
+                        <i class="icon-screen-desktop menu-icon"></i>
+                      </a> 
+                    </div>
+  
+                    <div class="col">
+                      <div class="collapse multi-collapse" id="multiCollapseExample3">
+                        <a class="nav-link" id= "options" href="ict3statusm75">
+                          <span class="title">M75ﾠﾠﾠﾠﾠﾠﾠ</span>
+                          <i class="icon-screen-desktop menu-icon"></i>
+                        </a> 
+                      </div>
+  
+                      <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample3">
+                          <a class="nav-link" id= "options" href="ict3statusideapad3i">
+                            <span class="title">Ideapad3iﾠﾠ</span>
+                            <i class="icon-screen-desktop menu-icon"></i>
+                          </a> 
+                        </div>
+
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample3">
+                            <a class="nav-link" id= "options" href="ict3statusideapad3a">
+                              <span class="title">Ideapad3aﾠ</span>
+                              <i class="icon-screen-desktop menu-icon"></i>
+                            </a> 
+                          </div>
+  
+                          <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample3">
+                              <a class="nav-link" id= "options" href="ict3statusideapad1">
+                                <span class="title">Sagittaﾠﾠﾠﾠ</span>
+                                <i class="icon-screen-desktop menu-icon"></i>
+                              </a> 
+                            </div>
+  
+                            <div class="col">
+                              <div class="collapse multi-collapse" id="multiCollapseExample3">
+                                <a class="nav-link" id= "options" href="ict3statuse14">
+                                  <span class="title">E14ﾠﾠﾠﾠﾠﾠﾠ</span>
+                                  <i class="icon-screen-desktop menu-icon"></i>
+                                </a> 
+                              </div>
+  
+                                                              
+                          
+  
+                </div>
+              </div>
+            </li>
+            
+            <li class="nav-item nav-category"><span class="nav-link"  style="color: seagreen;">Planilhas</span></li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth" >
+                <span class="menu-title">B.O.M</span>
+                <i class="icon-doc menu-icon"></i>
+              </a>
+              <div class="collapse" id="auth">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href=".">Neo50s</a></li>
+                  <li class="nav-item"> <a class="nav-link" href=".">M75</a></li>
+                  <li class="nav-item"> <a class="nav-link" href=".">Ideapad3i</a></li>
+                  <li class="nav-item"> <a class="nav-link" href=".">Ideapad3a</a></li>
+                  <li class="nav-item"> <a class="nav-link" href=".">Ideapad31</a></li>
+                  <li class="nav-item"> <a class="nav-link" href=".">e14</a></li>
+                </ul>
+              </div>
+              <li class="nav-item nav-category" ><span class="nav-link"  style="color: seagreen;">Tabelas De Registros</span></li>
+              <li class="nav-item">
+                
+                  <a class="btn btn-secondary" id="menu1"data-toggle="collapse" href="#multiCollapseExample4" role="button" aria-expanded="false" aria-controls="multiCollapseExample4">ICT 01</a>
+                  <button class="btn btn-secondary" id="menu2" type="button" data-toggle="collapse" data-target="#multiCollapseExample5" aria-expanded="false" aria-controls="multiCollapseExample5">ICT 02</button>
+                  <button class="btn btn-secondary" id="menu3" type="button" data-toggle="collapse" data-target="#multiCollapseExample6" aria-expanded="false" aria-controls="multiCollapseExample6">ICT 03</button>
+              <!-- ICT01 -->
+                <div class="row" id="optionsbar">
+                  <div class="col">
+                    <div class="collapse multi-collapse" id="multiCollapseExample4">
+                      <a class="nav-link" id="options" href="{% url 'n50sict1list' %}">
+                        <span class="title">Neo50sﾠﾠﾠﾠ</span>
+                        <i class="icon-screen-desktop menu-icon"></i>
+                      </a> 
+                    </div>
+                  
+                    <div class="collapse multi-collapse" id="multiCollapseExample4">
+                      <a class="nav-link" id="options" href="{% url 'm75ict1list' %}">
+                        <span class="title">M75ﾠﾠﾠﾠﾠﾠﾠ </span>
+                        <i class="icon-screen-desktop menu-icon"></i>
+                      </a> 
+                    </div>
+                  
+                    <div class="collapse multi-collapse" id="multiCollapseExample4">
+                      <a class="nav-link" id="options" href="{% url 'ideapad3iict1list'%}">
+                        <span class="title">Ideapad3iﾠﾠ  </span>
+                        <i class="icon-screen-desktop menu-icon"></i>
+                      </a> 
+                    </div>
+                    <div class="collapse multi-collapse" id="multiCollapseExample4">
+                      <a class="nav-link" id= "options" href="{% url 'ideapad3aict1list'%}">
+                        <span class="title">Ideapad3aﾠ  </span>
+                        <i class="icon-screen-desktop menu-icon"></i>
+                      </a> 
+                    </div>
+                    <div class="collapse multi-collapse" id="multiCollapseExample4">
+                      <a class="nav-link" id= "options" href="{% url 'ideapad1ict1list' %}">
+                        <span class="title">Sagittaﾠﾠﾠﾠ</span>
+                        <i class="icon-screen-desktop menu-icon"></i>
+                      </a> 
+                    </div>
+                    
+                  </div>
+                  <div class="collapse multi-collapse" id="multiCollapseExample4">
+                    <a class="nav-link" id= "options" href="{% url 'e14ict1list' %}">
+                      <span class="title">E14ﾠﾠﾠﾠﾠﾠﾠ</span>
+                      <i class="icon-screen-desktop menu-icon"></i>
+                    </a> 
+                  </div>
+  <!-- ICT02 -->
+                  <div class="col">
+                    <div class="collapse multi-collapse" id="multiCollapseExample5">
+                      <a class="nav-link" id= "options" href="{% url 'n50sict2list' %}">
+                        <span class="title">Neo50sﾠﾠﾠﾠ</span>
+                        <i class="icon-screen-desktop menu-icon"></i>
+                      </a> 
+                    </div>
+  
+                    <div class="col">
+                      <div class="collapse multi-collapse" id="multiCollapseExample5">
+                        <a class="nav-link" id= "options" href="{% url 'm75ict2list' %}">
+                          <span class="title">M75ﾠﾠﾠﾠﾠﾠﾠ</span>
+                          <i class="icon-screen-desktop menu-icon"></i>
+                        </a> 
+                      </div>
+  
+  
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample5">
+                            <a class="nav-link" id= "options" href="{% url 'ideapad3iict2list'%}">
+                              <span class="title">Ideapad3iﾠﾠ</span>
+                              <i class="icon-screen-desktop menu-icon"></i>
+                            </a> 
+                          </div>
+          
+                          <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample5">
+                              <a class="nav-link" id= "options" href="{% url 'ideapad3aict2list' %}">
+                                <span class="title">Ideapad3aﾠ</span>
+                                <i class="icon-screen-desktop menu-icon"></i>
+                              </a> 
+                            </div>
+            
+                            <div class="col">
+                              <div class="collapse multi-collapse" id="multiCollapseExample5">
+                                <a class="nav-link" id= "options" href="{% url 'ideapad1ict2list' %}">
+                                  <span class="title">Sagittaﾠﾠﾠﾠ</span>
+                                  <i class="icon-screen-desktop menu-icon"></i>
+                                </a> 
+                              </div>
+              
+                              <div class="col">
+                                <div class="collapse multi-collapse" id="multiCollapseExample5">
+                                  <a class="nav-link" id= "options" href="{% url 'e14ict2list' %}">
+                                    <span class="title">E14ﾠﾠﾠﾠﾠﾠﾠ</span>
+                                    <i class="icon-screen-desktop menu-icon"></i>
+                                  </a> 
+                                </div>
+                <!--  ICT03-->
+                    <div class="col">
+                      <div class="collapse multi-collapse" id="multiCollapseExample6">
+                        <a class="nav-link" id= "options" href="{% url 'n50sict3list' %}">
+                          <span class="title">Neo50sﾠﾠﾠﾠ</span>
+                          <i class="icon-screen-desktop menu-icon"></i>
+                        </a> 
+                      </div>
+    
+                      <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample6">
+                          <a class="nav-link" id= "options" href="{% url 'm75ict3list'%}">
+                            <span class="title">M75ﾠﾠﾠﾠﾠﾠﾠ</span>
+                            <i class="icon-screen-desktop menu-icon"></i>
+                          </a> 
+                        </div>
+    
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample6">
+                            <a class="nav-link" id= "options" href="{% url 'ideapad3iict3list'%}">
+                              <span class="title">Ideapad3iﾠﾠ</span>
+                              <i class="icon-screen-desktop menu-icon"></i>
+                            </a> 
+                          </div>
+  
+                          <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample6">
+                              <a class="nav-link" id= "options" href="{% url 'ideapad3aict3list'%}">
+                                <span class="title">Ideapad3aﾠ</span>
+                                <i class="icon-screen-desktop menu-icon"></i>
+                              </a> 
+                            </div>
+    
+                            <div class="col">
+                              <div class="collapse multi-collapse" id="multiCollapseExample6">
+                                <a class="nav-link" id= "options" href="{% url 'ideapad1ict3list' %}">
+                                  <span class="title">Sagittaﾠﾠﾠﾠ</span>
+                                  <i class="icon-screen-desktop menu-icon"></i>
+                                </a> 
+                              </div>
+    
+                              <div class="col">
+                                <div class="collapse multi-collapse" id="multiCollapseExample6">
+                                  <a class="nav-link" id= "options" href="{%url 'e14ict3list'%}">
+                                    <span class="title">E14ﾠﾠﾠﾠﾠﾠﾠ</span>
+                                    <i class="icon-screen-desktop menu-icon"></i>
+                                  </a> 
+                                </div>
+    
+            </li>
+            </ul>
+        </nav>
+        <!-- partial -->
+        {% block quickactions %}
+        
+        <div class="main-panel">
+          <div class="row quick-action-toolbar">
+              <div class="col-md-12 grid-margin">
+                <div class="card">
+                  <div class="card-header d-block d-md-flex">
+                    <h5 class="mb-0">Quick Actions</h5>
+                  </div>
+                  <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <button style="border: none;"> <a style="color:black;" href="admin"><i class="icon-badge mr-2"></i>Admin Area</a> </button>
+                    </div>
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <button style="border: none;"> <a style="color:black;" href="."><i class="icon-home mr-2"></i>Home</a> </button>
+                    </div>
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <button style="border: none;"> <a style="color:black;" href="usuariocreate"><i class="icon-user mr-2"></i>Adicionar Usuário </a> </button>
+                    </div>
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <button style="border: none;"> <a style="color:black;" href="{% url 'logout' %}">Logout </a> <i class="icon-logout mr-2"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              {% endblock %}
+              
+              {% block content %}
+              <script>
+
+
+
+var config = {
+    type: 'bar',
+    data: {
+      datasets: [{
+        data: [1916, 1158, 1054],
+        backgroundColor: [
+          '#f5dc8c', '#8ed3ac', '#1EAEDB', '#1EAEDB', '#1EAEDB'
+        ],
+        label: 'Montados'
+      }],
+      labels: ['Montados', 'Testáveis', 'Testando']
+    },
+    options: {
+          title: {
+          display: true,
+          text: 'Neo50s'
+      },
+      scales: {
+        xAxes: [{
+            ticks:{
+                stepSize : 10,
+
+            },
+            stacked: true,
+          gridLines: {
+                  lineWidth: 0
+              }
+        }],
+        yAxes: [{
+
+            stacked: true
+
+        }]
+    },
+    
+    responsive: true,
+    cutoutPercentage: 40,
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+         return data['labels'][tooltipItem['index']] + ': ' + data['datasets'][0]['data'][tooltipItem['index']];
+      }
+    }
+  }
+}
+};
+
+  window.onload = function() {
+    var ctx = document.getElementById('pie-chart').getContext('2d');
+    window.myPie = new Chart(ctx, config);
+  };
+
+
+              </script>
+            <div class="content-wrapper">
+              <div class="col-12 stretch-card grid-margin" style="visibility:hidden">
+                <div class="card card-secondary">
+                      <span aria-hidden="true">×</span>
+                    
+                  
+                </div>
+              </div>
+            </div><!-- Quick Action Toolbar Starts-->
+            
+            <!-- Quick Action Toolbar Ends-->
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="d-sm-flex align-items-baseline report-summary-header">
+                          <h5 class="font-weight-semibold">Report Summary</h5> <span class="ml-auto">Updated Report</span> <button class="btn btn-icons border-0 p-2"><i class="icon-refresh"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row report-inner-cards-wrapper">
+                      <div class=" col-md -6 col-xl report-inner-card">
+                        <div class="inner-card-text">
+                          <span class="report-title">EXPENSE</span>
+                          <h4>$32123</h4>
+                          <span class="report-count"> 2 Reports</span>
+                        </div>
+                        <div class="inner-card-icon bg-success">
+                          <i class="icon-rocket"></i>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-xl report-inner-card">
+                        <div class="inner-card-text">
+                          <span class="report-title">PURCHASE</span>
+                          <h4>95,458</h4>
+                          <span class="report-count"> 3 Reports</span>
+                        </div>
+                        <div class="inner-card-icon bg-danger">
+                          <i class="icon-briefcase"></i>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-xl report-inner-card">
+                        <div class="inner-card-text">
+                          <span class="report-title">QUANTITY</span>
+                          <h4>2650</h4>
+                          <span class="report-count"> 5 Reports</span>
+                        </div>
+                        <div class="inner-card-icon bg-warning">
+                          <i class="icon-globe-alt"></i>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-xl report-inner-card">
+                        <div class="inner-card-text">
+                          <span class="report-title">RETURN</span>
+                          <h4>25,542</h4>
+                          <span class="report-count"> 9 Reports</span>
+                        </div>
+                        <div class="inner-card-icon bg-primary">
+                          <i class="icon-diamond"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row income-expense-summary-chart-text">
+                      <div class="col-xl-4">
+                        <h5>Income And Expenses Summary</h5>
+                        <p class="small text-muted">A comparison of people who mark themselves of their ineterest from the date range given above. Learn more.</p>
+                      </div>
+                      <div class=" col-md-3 col-xl-2">
+                        <p class="income-expense-summary-chart-legend"> <span style="border-color: #6469df"></span> Total Income </p>
+                        <h3>$ 1,766.00</h3>
+                      </div>
+                      <div class="col-md-3 col-xl-2">
+                        <p class="income-expense-summary-chart-legend"> <span style="border-color: #37ca32"></span> Total Expense </p>
+                        <h3>$ 5,698.30</h3>
+                      </div>
+                      <div class="col-md-6 col-xl-4 d-flex align-items-center">
+                        <div class="input-group" id="income-expense-summary-chart-daterange">
+                          <div class="inpu-group-prepend input-group-text"><i class="icon-calendar"></i></div>
+                          <input type="text" class="form-control">
+                          <div class="input-group-prepend input-group-text"><i class="icon-arrow-down"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row income-expense-summary-chart mt-3">
+                      <div class="col-md-12">
+                        <div class="ct-chart" id="income-expense-summary-chart"><svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="300" class="ct-chart-line" style="width: 100%; height: 300px;"><g class="ct-grids"><line x1="50" x2="50" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="160.72727272727275" x2="160.72727272727275" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="271.4545454545455" x2="271.4545454545455" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="382.1818181818182" x2="382.1818181818182" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="492.90909090909093" x2="492.90909090909093" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="603.6363636363636" x2="603.6363636363636" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="714.3636363636364" x2="714.3636363636364" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="825.0909090909091" x2="825.0909090909091" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="935.8181818181819" x2="935.8181818181819" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="1046.5454545454545" x2="1046.5454545454545" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="1157.2727272727273" x2="1157.2727272727273" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line x1="1268" x2="1268" y1="15" y2="265" class="ct-grid ct-horizontal"></line><line y1="265" y2="265" x1="50" x2="1268" class="ct-grid ct-vertical"></line><line y1="181.66666666666669" y2="181.66666666666669" x1="50" x2="1268" class="ct-grid ct-vertical"></line><line y1="98.33333333333334" y2="98.33333333333334" x1="50" x2="1268" class="ct-grid ct-vertical"></line><line y1="15" y2="15" x1="50" x2="1268" class="ct-grid ct-vertical"></line></g><g><g class="ct-series ct-series-a"><path d="M50,265L50,180C86.909,149.333,123.818,88,160.727,88C197.636,88,234.545,188.333,271.455,188.333C308.364,188.333,345.273,20,382.182,20C419.091,20,456,211.667,492.909,211.667C529.818,211.667,566.727,74.333,603.636,74.333C640.545,74.333,677.455,219,714.364,219C751.273,219,788.182,57,825.091,57C862,57,898.909,231.667,935.818,231.667C972.727,231.667,1009.636,134.333,1046.545,134.333C1083.455,134.333,1120.364,241.667,1157.273,241.667C1194.182,241.667,1231.091,135.889,1268,83L1268,265Z" class="ct-area"></path><path d="M50,180C86.909,149.333,123.818,88,160.727,88C197.636,88,234.545,188.333,271.455,188.333C308.364,188.333,345.273,20,382.182,20C419.091,20,456,211.667,492.909,211.667C529.818,211.667,566.727,74.333,603.636,74.333C640.545,74.333,677.455,219,714.364,219C751.273,219,788.182,57,825.091,57C862,57,898.909,231.667,935.818,231.667C972.727,231.667,1009.636,134.333,1046.545,134.333C1083.455,134.333,1120.364,241.667,1157.273,241.667C1194.182,241.667,1231.091,135.889,1268,83" class="ct-line"></path></g><g class="ct-series ct-series-b"><path d="M50,265L50,115C86.909,145,123.818,205,160.727,205C197.636,205,234.545,106.667,271.455,106.667C308.364,106.667,345.273,218.333,382.182,218.333C419.091,218.333,456,119.667,492.909,119.667C529.818,119.667,566.727,217.667,603.636,217.667C640.545,217.667,677.455,96,714.364,96C751.273,96,788.182,181.667,825.091,181.667C862,181.667,898.909,75,935.818,75C972.727,75,1009.636,215,1046.545,215C1083.455,215,1120.364,27.667,1157.273,27.667C1194.182,27.667,1231.091,148.111,1268,208.333L1268,265Z" class="ct-area"></path><path d="M50,115C86.909,145,123.818,205,160.727,205C197.636,205,234.545,106.667,271.455,106.667C308.364,106.667,345.273,218.333,382.182,218.333C419.091,218.333,456,119.667,492.909,119.667C529.818,119.667,566.727,217.667,603.636,217.667C640.545,217.667,677.455,96,714.364,96C751.273,96,788.182,181.667,825.091,181.667C862,181.667,898.909,75,935.818,75C972.727,75,1009.636,215,1046.545,215C1083.455,215,1120.364,27.667,1157.273,27.667C1194.182,27.667,1231.091,148.111,1268,208.333" class="ct-line"></path></g></g><g class="ct-labels"><foreignObject style="overflow: visible;" x="50" y="270" width="110.72727272727273" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Jan</span></foreignObject><foreignObject style="overflow: visible;" x="160.72727272727275" y="270" width="110.72727272727273" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Feb</span></foreignObject><foreignObject style="overflow: visible;" x="271.4545454545455" y="270" width="110.72727272727272" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Mar</span></foreignObject><foreignObject style="overflow: visible;" x="382.1818181818182" y="270" width="110.72727272727275" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Apr</span></foreignObject><foreignObject style="overflow: visible;" x="492.90909090909093" y="270" width="110.72727272727269" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">May</span></foreignObject><foreignObject style="overflow: visible;" x="603.6363636363636" y="270" width="110.72727272727275" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Jun</span></foreignObject><foreignObject style="overflow: visible;" x="714.3636363636364" y="270" width="110.72727272727275" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Jul</span></foreignObject><foreignObject style="overflow: visible;" x="825.0909090909091" y="270" width="110.72727272727275" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Aug</span></foreignObject><foreignObject style="overflow: visible;" x="935.8181818181819" y="270" width="110.72727272727275" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Sep</span></foreignObject><foreignObject style="overflow: visible;" x="1046.5454545454545" y="270" width="110.72727272727263" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Oct</span></foreignObject><foreignObject style="overflow: visible;" x="1157.2727272727273" y="270" width="110.72727272727275" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 111px; height: 20px;">Nov</span></foreignObject><foreignObject style="overflow: visible;" x="1268" y="270" width="30" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 30px; height: 20px;">Dec</span></foreignObject><foreignObject style="overflow: visible;" y="181.66666666666669" x="10" height="83.33333333333333" width="30"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 83px; width: 30px;">250</span></foreignObject><foreignObject style="overflow: visible;" y="98.33333333333336" x="10" height="83.33333333333333" width="30"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 83px; width: 30px;">500</span></foreignObject><foreignObject style="overflow: visible;" y="15" x="10" height="83.33333333333334" width="30"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 83px; width: 30px;">750</span></foreignObject><foreignObject style="overflow: visible;" y="-15" x="10" height="30" width="30"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 30px; width: 30px;">1000</span></foreignObject></g></svg></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-sm-flex align-items-center mb-4">
+                      <h4 class="card-title mb-sm-0">Products Inventory</h4>
+                      <a href="#" class="text-dark ml-auto mb-3 mb-sm-0"> View all Products</a>
+                    </div>
+                    <div class="table-responsive border rounded p-1">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="font-weight-bold">Store ID</th>
+                            <th class="font-weight-bold">Amount</th>
+                            <th class="font-weight-bold">Gateway</th>
+                            <th class="font-weight-bold">Created at</th>
+                            <th class="font-weight-bold">Paid at</th>
+                            <th class="font-weight-bold">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img class="img-sm rounded-circle" src="images/faces/face1.jpg" alt="profile image"> Katie Holmes
+                            </td>
+                            <td>$3621</td>
+                            <td><img src="images/dashboard/alipay.png" alt="alipay" class="gateway-icon mr-2"> alipay</td>
+                            <td>04 Jun 2019</td>
+                            <td>18 Jul 2019</td>
+                            <td>
+                              <div class="badge badge-success p-2">Paid</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="img-sm rounded-circle" src="images/faces/face2.jpg" alt="profile image"> Minnie Copeland
+                            </td>
+                            <td>$6245</td>
+                            <td><img src="images/dashboard/paypal.png" alt="alipay" class="gateway-icon mr-2"> Paypal</td>
+                            <td>25 Sep 2019</td>
+                            <td>07 Oct 2019</td>
+                            <td>
+                              <div class="badge badge-danger p-2">Pending</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="img-sm rounded-circle" src="images/faces/face3.jpg" alt="profile image"> Rodney Sims
+                            </td>
+                            <td>$9265</td>
+                            <td><img src="images/dashboard/alipay.png" alt="alipay" class="gateway-icon mr-2"> alipay</td>
+                            <td>12 dec 2019</td>
+                            <td>26 Aug 2019</td>
+                            <td>
+                              <div class="badge badge-warning p-2">Failed</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="img-sm rounded-circle" src="images/faces/face4.jpg" alt="profile image"> Carolyn Barker
+                            </td>
+                            <td>$2263</td>
+                            <td><img src="images/dashboard/alipay.png" alt="alipay" class="gateway-icon mr-2"> alipay</td>
+                            <td>30 Sep 2019</td>
+                            <td>20 Oct 2019</td>
+                            <td>
+                              <div class="badge badge-success p-2">Paid</div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="d-flex mt-4 flex-wrap">
+                      <p class="text-muted">Showing 1 to 10 of 57 entries</p>
+                      <nav class="ml-auto">
+                        <ul class="pagination separated pagination-info">
+                          <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-left"></i></a></li>
+                          <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                          <li class="page-item"><a href="#" class="page-link">2</a></li>
+                          <li class="page-item"><a href="#" class="page-link">3</a></li>
+                          <li class="page-item"><a href="#" class="page-link">4</a></li>
+                          <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-right"></i></a></li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endblock %}
+   
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src= {% static "vendors/js/vendor.bundle.base.js" %}></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src= {% static "vendors/chart.js/Chart.min.js" %}></script>
+    <script src= {% static "vendors/moment/moment.min.js" %}></script>
+    <script src= {% static "vendors/daterangepicker/daterangepicker.js" %}></script>
+    <script src= {% static "vendors/chartist/chartist.min.js" %}></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src= {% static "js/off-canvas.js" %}></script>
+    <script src= {% static "js/misc.js" %}></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src= {% static "js/dashboardchart.js" %}></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>
